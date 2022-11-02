@@ -6,13 +6,17 @@ import com.sample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import com.google.gson.Gson;
 
 
 @Controller
 @RequestMapping(value = {"user"})
 public class ViewUsersController {
+
+    private static final Gson gson = new Gson();
 
     @Autowired
     private UserService userService;
@@ -21,8 +25,14 @@ public class ViewUsersController {
     private ContactService contactService;
 
     @RequestMapping(value = {"view"}, method = RequestMethod.GET)
-    public ModelAndView viewUsers() {
+    public ModelAndView viewUsers( Model model)  {
         System.out.println("ViewUsersController.viewUsers");
+
+
+        ResponseEntity usersList = userService.getAllUsers();
+        System.out.println(gson.toJson(usersList.getBody()));
+
+        model.addAttribute("users", gson.toJson(usersList.getBody()));
         return new ModelAndView("ViewUsers");
     }
 
