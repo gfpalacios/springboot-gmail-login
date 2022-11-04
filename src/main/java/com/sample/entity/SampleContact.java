@@ -13,24 +13,26 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "sample_contact")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SampleContact.findAll", query = "SELECT s FROM SampleContact s")})
 public class SampleContact implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "contact_id")
     private Integer contactId;
+
     @Size(max = 255)
     @Column(name = "contact")
     private String contact;
+
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
     private SampleUser userId;
@@ -90,5 +92,5 @@ public class SampleContact implements Serializable {
     public String toString() {
         return "com.sample.entity.SampleContact[ contactId=" + contactId + " ]";
     }
-    
+
 }

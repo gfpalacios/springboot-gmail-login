@@ -6,9 +6,7 @@ import com.sample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 
@@ -23,18 +21,6 @@ public class ViewUsersController {
 
     @Autowired
     private ContactService contactService;
-
-    @RequestMapping(value = {"view"}, method = RequestMethod.GET)
-    public ModelAndView viewUsers( Model model)  {
-        System.out.println("ViewUsersController.viewUsers");
-
-
-        ResponseEntity usersList = userService.getAllUsers();
-        System.out.println(gson.toJson(usersList.getBody()));
-
-        model.addAttribute("users", gson.toJson(usersList.getBody()));
-        return new ModelAndView("ViewUsers");
-    }
 
     @RequestMapping(value = {"get"}, method = RequestMethod.GET)
     public ResponseEntity getAllUsers() {

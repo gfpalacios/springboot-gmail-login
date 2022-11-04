@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sample.entity;
 
 import java.io.Serializable;
@@ -10,40 +5,43 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "sample_user")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SampleUser.findAll", query = "SELECT s FROM SampleUser s")})
+        @NamedQuery(name = "SampleUser.findAll", query = "SELECT s FROM SampleUser s")})
 public class SampleUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "username")
     private String username;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "gender")
     private int gender;
+
     @Size(max = 255)
     @Column(name = "nic")
     private String nic;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId",fetch = FetchType.LAZY)
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<SampleContact> sampleContactCollection;
 
     public SampleUser() {
@@ -100,7 +98,6 @@ public class SampleUser implements Serializable {
         this.nic = nic;
     }
 
-    @XmlTransient
     public List<SampleContact> getSampleContactCollection() {
         return sampleContactCollection;
     }
@@ -133,5 +130,5 @@ public class SampleUser implements Serializable {
     public String toString() {
         return "com.sample.entity.SampleUser[ userId=" + userId + " ]";
     }
-    
+
 }
