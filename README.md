@@ -18,7 +18,7 @@ Google account. You can also change the api url and scope which will provide acc
 
 
 
-## Installation and Getting Started
+## Installation
 
 ### Requisites
 * Java 11 or greater
