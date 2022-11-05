@@ -3,27 +3,36 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
-import logo from './logo.svg';
 import './App.css';
+import Welcome from './components/Welcome'
 
 
 function App() {
 
+   const [user, setUser] = useState()
    const [isAuthenticated, setIsAuthenticated] = useState(false)
+   const [contacts, setContacts] = useState([])
+   const [isContactSaved, setContactsSaved] = useState(false)
 
 useEffect(() => {
+if(isAuthenticated && !isContactSaved && contacts.length > 0){
+const user = {"username": "test","sampleContactCollection": contacts}
 
-fetch('http://localhost:8080/user/get', {
-            method: 'GET',
+fetch('http://localhost:8080/user/add', {
+            method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify(user),
         }).then((response) => response.json())
           .then((data) => {
-            console.log(data)
+            setUser(data)
+            setContactsSaved(true)
           });
- }, []);
+
+}
+
+ }, [isAuthenticated, contacts]);
 
 
  const handleAuthClick = () => {
@@ -46,40 +55,30 @@ fetch('http://localhost:8080/user/get', {
          }
  }
 
-       /**
-              * Print the display name if available for 10 connections.
-              */
-             async function listConnectionNames() {
-               let response;
-               try {
-                 // Fetch first 10 files
-                 response = await window.gapi.client.people.people.connections.list({
-                   'resourceName': 'people/me',
-                   'pageSize': 10,
-                   'personFields': 'names,emailAddresses',
-                 });
-               } catch (err) {
-               console.log(err)
-                 return;
-               }
-               const connections = response.result.connections;
-               if (!connections || connections.length == 0) {
-                 document.getElementById('content').innerText = 'No connections found.';
-                 return;
-               }
-               // Flatten to string to display
-               const output = connections.reduce(
-                   (str, person) => {
-                     if (!person.names || person.names.length === 0) {
-                       return `${str}Missing display name\n`;
-                     }
-                     return `${str}${person.names[0].displayName}\n`;
-                   },
-                   'Connections:\n');
+        /**
+          * Print the display name if available for 10 connections.
+          */
+         async function listConnectionNames() {
+           let response;
+           try {
+             // Fetch first 10 files
+             response = await window.gapi.client.people.people.connections.list({
+               'resourceName': 'people/me',
+               'pageSize': 10,
+               'personFields': 'names,emailAddresses',
+             });
+           } catch (err) {
+           console.log(err)
+             return;
+           }
+           const connections = response.result.connections;
+           if (!connections || connections.length == 0) {
+             return;
+           }
 
-                    console.log(output)
-             }
-
+           const output = connections.map(item => ({"contact":item.names[0].displayName}) )
+           setContacts(output)
+         }
 
 
   return (
@@ -96,16 +95,7 @@ fetch('http://localhost:8080/user/get', {
             </Typography>
             <Button  id="authorize_button" onClick={handleAuthClick} variant="contained">Authorize</Button>
           </Box>)}
-          {isAuthenticated && (<Box sx={{
-                       width: 600,
-                       height: 200,
-                       backgroundColor: 'secondary.dark',
-                     }}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Welcome!
-            </Typography>
-
-          </Box>)}
+          {isAuthenticated && (<Welcome user={user} />)}
         </Container>
     </div>
   );

@@ -26,21 +26,6 @@ public class SampleUser implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "password")
-    private String password;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "gender")
-    private int gender;
-
-    @Size(max = 255)
-    @Column(name = "nic")
-    private String nic;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<SampleContact> sampleContactCollection;
 
@@ -54,8 +39,6 @@ public class SampleUser implements Serializable {
     public SampleUser(Integer userId, String username, String password, int gender) {
         this.userId = userId;
         this.username = username;
-        this.password = password;
-        this.gender = gender;
     }
 
     public Integer getUserId() {
@@ -72,30 +55,6 @@ public class SampleUser implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
-    public String getNic() {
-        return nic;
-    }
-
-    public void setNic(String nic) {
-        this.nic = nic;
     }
 
     public List<SampleContact> getSampleContactCollection() {

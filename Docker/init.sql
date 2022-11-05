@@ -11,17 +11,14 @@ DROP TABLE IF EXISTS `sample_user`;
 CREATE TABLE `sample_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `gender` int(11) NOT NULL,
-  `nic` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of sample_user
 -- ----------------------------
-INSERT INTO `sample_user` VALUES ('11', '0' 'User 1', 'user1', '#65454015101');
-INSERT INTO `sample_user` VALUES ('12',  '1','User 2', 'user2', '#6545456400651');
+INSERT INTO `sample_user` VALUES ('11', 'fabio@gmail.com');
+INSERT INTO `sample_user` VALUES ('12',  'daniel@gmail.com');
 
 
 
@@ -41,12 +38,12 @@ CREATE TABLE `sample_contact` (
 -- ----------------------------
 -- Records of sample_contact
 -- ----------------------------
-INSERT INTO `sample_contact` VALUES ('15', '01446040546', '11');
-INSERT INTO `sample_contact` VALUES ('16', '5645014065', '11');
-INSERT INTO `sample_contact` VALUES ('17', '6178917917', '11');
-INSERT INTO `sample_contact` VALUES ('18', '59465415645', '12');
-INSERT INTO `sample_contact` VALUES ('19', '9454684656', '12');
-INSERT INTO `sample_contact` VALUES ('20', '5465145645', '12');
+INSERT INTO `sample_contact` VALUES ('15', 'jose', '11');
+INSERT INTO `sample_contact` VALUES ('16', 'carlos', '11');
+INSERT INTO `sample_contact` VALUES ('17', 'juan', '11');
+INSERT INTO `sample_contact` VALUES ('18', 'manual', '12');
+INSERT INTO `sample_contact` VALUES ('19', 'andrea', '12');
+INSERT INTO `sample_contact` VALUES ('20', 'joana', '12');
 
 
 

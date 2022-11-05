@@ -1,10 +1,13 @@
 package com.sample.dto.user;
 
+import com.sample.dto.contact.ViewContactDto;
+
+import java.util.List;
+
 public class ViewUserDto {
     private Integer userId;
     private String username;
-    private int gender;
-    private String nic;
+    private List<ViewContactDto> sampleContactCollection;
 
     public ViewUserDto() {
     }
@@ -25,19 +28,11 @@ public class ViewUserDto {
         this.username = username;
     }
 
-    public int getGender() {
-        return gender;
+    public List<ViewContactDto> getSampleContactCollection() {
+        return sampleContactCollection;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
-    public String getNic() {
-        return nic;
-    }
-
-    public void setNic(String nic) {
-        this.nic = nic;
+    public void setSampleContactCollection(List<ViewContactDto> contacts) {
+        this.sampleContactCollection = contacts;
     }
 }

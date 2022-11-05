@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping(value = {"user"})
-public class ViewUsersController {
+public class UsersController {
 
     private static final Gson gson = new Gson();
 
@@ -28,6 +30,12 @@ public class ViewUsersController {
         return userService.getAllUsers();
     }
 
+    @RequestMapping(value = {"get/{userId}"}, method = RequestMethod.GET)
+    public ResponseEntity getUser(@PathVariable("userId")  Integer userId) {
+        System.out.println("ViewUsersController.getUser");
+        return userService.getUser(userId);
+    }
+
     @RequestMapping(value = {"get/contact"}, method = RequestMethod.GET)
     public ResponseEntity getContactsForUser(@RequestParam("userId") Integer userId) {
         System.out.println("ViewUsersController.getContactsForUser");
@@ -38,6 +46,11 @@ public class ViewUsersController {
     public ResponseEntity addUser(@RequestBody SampleUser sampleUser) {
         System.out.println("ViewUsersController.getContactsForUser");
         return userService.addUser(sampleUser);
+    }
+    @RequestMapping(value = {"edit/{userId}/contacts"}, method = RequestMethod.POST)
+    public ResponseEntity addContacts(@PathVariable("userId") Integer userId, @RequestBody List<String> contacts) {
+        System.out.println("ViewUsersController.addContacts");
+        return userService.addContacts(userId, contacts);
     }
 
     @RequestMapping(value = {"delete/{userId}"}, method = RequestMethod.DELETE)
