@@ -1,4 +1,4 @@
-# Getting Started with Spring boot, spring mvc, gmail api and react
+# Getting Started with spring-boot, spring-mvc, gmail-api and react
 
 This project is a setup sample for a simple api which store and read from a mysql db a list of contact from a 
 Google account. You can also change the api url and scope which will provide access to others Google account data. 

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import './App.css';
 import Welcome from './components/Welcome'
+import Greetings from './components/Greetings'
 
 
 function App() {
@@ -84,18 +83,23 @@ fetch('http://localhost:8080/user/add', {
   return (
     <div className="App">
 
-    <Container maxWidth="sm">
-          {!isAuthenticated && (<Box sx={{
-                       width: 600,
-                       height: 200,
-                       backgroundColor: 'primary.dark',
+    <Container>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="75vh"
+      minWidth="100vh"
+    >
+          <Box sx={{
+                       width: 1000,
+                       backgroundColor: isAuthenticated?'secondary.dark': 'primary.dark' ,
                      }}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Gmail API Integration
-            </Typography>
-            <Button  id="authorize_button" onClick={handleAuthClick} variant="contained">Authorize</Button>
-          </Box>)}
-          {isAuthenticated && (<Welcome user={user} />)}
+
+                     {!isAuthenticated && (<Greetings handleAuthClick={handleAuthClick} />)}
+                     {isAuthenticated && (<Welcome user={user} />)}
+                     </Box>
+                     </Box>
         </Container>
     </div>
   );
