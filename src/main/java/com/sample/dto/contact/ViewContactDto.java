@@ -7,11 +7,6 @@ public class ViewContactDto {
     public ViewContactDto() {
     }
 
-    public ViewContactDto(int contactId, String contact) {
-        this.contactId = contactId;
-        this.contact = contact;
-    }
-
     public int getContactId() {
         return contactId;
     }

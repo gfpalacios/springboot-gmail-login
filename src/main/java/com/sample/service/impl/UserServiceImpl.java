@@ -21,7 +21,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    protected UserDao userDao;
 
     @Override
     public ResponseEntity getAllUsers() {
@@ -99,17 +99,6 @@ public class UserServiceImpl implements UserService {
         }catch (Exception e){
             System.out.println("UserServiceImpl.editUser:" + e.getMessage());
             return new ResponseEntity(new SystemMessage("Oops User Add Failed ;)"), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @Override
-    public ResponseEntity deleteUser(int userId) {
-        System.out.println("UserServiceImpl.deleteUser");
-        if (userDao.delete(SampleUser.class, userId) > 0) {
-            return new ResponseEntity(new SystemMessage("Delete Success..!"), HttpStatus.OK);
-        } else {
-            return new ResponseEntity(new SystemMessage("Delete Failed..!"), HttpStatus.BAD_REQUEST);
-
         }
     }
 }

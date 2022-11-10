@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sample.dao.impl;
 
 import com.sample.dao.GenericDao;
@@ -30,7 +25,7 @@ public abstract class GenericDaoImpl<PK extends Serializable, T> implements Gene
     }
 
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     protected Session getSession() {
         return sessionFactory.getCurrentSession();
@@ -57,59 +52,12 @@ public abstract class GenericDaoImpl<PK extends Serializable, T> implements Gene
 
     @Override
     public T getByKey(PK key) {
-        return (T) getSession().get(daoType, key);
+        return getSession().get(daoType, key);
     }
 
     @Override
     public List<T> getAll() {
         return (List<T>) createEntityCriteria().list();
-    }
-
-    @Override
-    public Integer getInteger(Object val) {
-        try {
-            return Integer.parseInt(val.toString());
-        } catch (NullPointerException | NumberFormatException e) {
-            return 0;
-        }
-    }
-
-    @Override
-    public String getString(Object val) {
-        try {
-            return val.toString();
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-    @Override
-    public Boolean getBoolean(Object val) {
-        try {
-            return Boolean.parseBoolean(val.toString());
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-
-    public Double getDouble(Object val) {
-        try {
-            return new Double(val.toString());
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-
-    @Override
-    public void print(String name,Object object){
-        System.out.println("HR-PRINT : "+name+" > "+object);
-    }
-
-
-    public void print(String name){
-        System.out.println("SAMO-PRINT : "+name);
     }
 
 }

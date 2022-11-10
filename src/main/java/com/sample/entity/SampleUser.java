@@ -85,9 +85,4 @@ public class SampleUser implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.sample.entity.SampleUser[ userId=" + userId + " ]";
-    }
-
 }
